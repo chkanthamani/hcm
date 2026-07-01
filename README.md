@@ -31,9 +31,6 @@ Tools: Git, GitHub, VSCode
 
 AI technologies: Cursor, Git copilot, Claude
 
-## screenshots
-![alt text](login.png)
-
 ## Development server
 
 To start a local development server, run:
