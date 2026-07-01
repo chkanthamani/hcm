@@ -2,6 +2,24 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.1.
 
+## Implemented features
+✔ JWT Authentication
+✔ Role-Based Access
+✔ Employee CRUD Operations
+✔ Search, Sort & Pagination
+✔ Soft Delete (Deactivate/Reactivate)
+✔ Image Upload for Profile picture
+✔ HTTP Interceptors
+✔ Simple Dashboard
+
+## Technologies used
+
+Design: HTML5, CSS, SCSS, Bootstrap
+
+Frontend: ANGULAR, JAVASCRIPT, TYPESCRIPT, JQERY, RXJS Library, 
+
+Backend: NodeJS, ExpressJS, Mysql DB
+
 ## Development server
 
 To start a local development server, run:
