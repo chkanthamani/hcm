@@ -1,0 +1,128 @@
+<div class="page-body">
+    <app-header></app-header>
+
+    @if (selectedEmployee) {
+    <div class="overlay-backdrop" (click)="closeEmployeeDetails()"></div>
+    <aside class="employee-details-panel" role="dialog" aria-modal="true" aria-labelledby="employee-details-title">
+        <div class="panel-header">
+            <div>
+                <p class="panel-label">Employee Details</p>
+                <h3 id="employee-details-title">{{ selectedEmployee.fullName || '—' }}</h3>
+            </div>
+            <button type="button" class="icon-btn close-btn" (click)="closeEmployeeDetails()" title="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="panel-body">
+            <div class="detail-row">
+                <span class="detail-label">Email</span>
+                <span class="detail-value">{{ selectedEmployee.email || '—' }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Department</span>
+                <span class="detail-value">{{ selectedEmployee.department || '—' }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Status</span>
+                <span class="detail-value">
+                    @if (selectedEmployee.status === 1) {
+                    <span class="badge bg-success">Active</span>
+                    }
+                    @else {
+                    <span class="badge bg-danger">Inactive</span>
+                    }
+                </span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Date of Joining</span>
+                <span class="detail-value">{{ selectedEmployee.dateOfJoining || '—' }}</span>
+            </div>
+        </div>
+    </aside>
+    }
+
+    <div class="row">
+        <div class="col-4">
+            <div class="card count-card">
+                <div class="card-header">Total Employees</div>
+                <div class="card-body card-count">{{dashboardData?.totalEmployees}}</div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card count-card">
+                <div class="card-header">Active Employees</div>
+                <div class="card-body card-count">{{dashboardData?.activeEmployees}}</div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card count-card">
+                <div class="card-header">Inactive Employees</div>
+                <div class="card-body card-count">{{dashboardData?.inactiveEmployees}}</div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card count-card">
+                <div class="card-header">Admin Count</div>
+                <div class="card-body card-count">{{dashboardData?.adminCount}}</div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card count-card">
+                <div class="card-header">HR Count</div>
+                <div class="card-body card-count">{{dashboardData?.hrCount}}</div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card count-card">
+                <div class="card-header">Employee Count</div>
+                <div class="card-body card-count">{{dashboardData?.employeeCount}}</div>
+            </div>
+        </div>
+
+    <div class="card table-card">
+        <div class="card-header table-card-header">
+            <div class="card-heading">All Employees</div>
+        </div>
+        <div class="card-body">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Employee</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (employee of employees; track employee.id) {
+                    <tr>
+                        <td>{{ employee.fullName || '—' }}</td>
+                        <td>{{ employee.email || '—' }}</td>
+                        <td>{{ employee.department || '—' }}</td>
+                        <td>
+                            @if (employee.status === 1) {
+                            <span class="badge bg-success">Active</span>
+                            }
+                            @else {
+                            <span class="badge bg-danger">Inactive</span>
+                            }
+                        </td>
+                        <td>
+                            <button type="button" class="icon-btn" (click)="openEmployeeDetails(employee)" title="View details">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    }
+                    @if (!employees.length) {
+                    <tr>
+                        <td colspan="5" class="empty-state">No employees found</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

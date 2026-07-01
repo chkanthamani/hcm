@@ -1,0 +1,47 @@
+<div class="login-container">
+    @if(loginMode == 'login'){
+        <form [formGroup]="loginForm" class="login-form" (ngSubmit)="loginSubmit()">
+            <h3>Login</h3>
+            <div class="form-group">
+                <label class="form-label">Email/Username</label>
+                <input type="text" class="form-control" formControlName="email" placeholder="Enter Email/Username">
+                @if(loginForm.get('email')?.errors && (loginForm.get('email')?.invalid && loginForm.get('email')?.touched)){
+                    <span class="error-field">Username is required</span> 
+                }
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" formControlName="password" placeholder="Enter password">
+                @if(loginForm.get('password')?.errors && (loginForm.get('password')?.invalid && loginForm.get('password')?.touched)){
+                    <span class="error-field">Password is required</span>
+                }
+            </div>
+            <button type="submit" class="btn btn-primary" [attr.disabled]="loginForm.invalid ? true : null">Login</button>
+            <!-- <p>If you don't have an account <button class="btn btn-link" type="button" (click)="formReset('signup')">signup</button> here</p> -->
+        </form>
+    }
+
+    @else if(loginMode == 'signup'){
+    <!-- sign up -->
+     <form [formGroup]="signupForm" class="login-form">
+        <h3>Sign Up</h3>
+        <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="text" class="form-control" formControlName="email" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label class="form-label">New Password</label>
+            <input type="password" class="form-control" formControlName="password" placeholder="Enter password">
+        </div>
+        <div class="form-group">
+            <label class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" formControlName="confirmPassword" placeholder="Enter password">
+            @if(error){
+                <span class="error-field">{{ error }}</span>
+            }
+        </div>
+        <button type="submit" class="btn btn-primary">Sign up</button>
+        <p>Already have an account <button type="button" class="btn btn-link" (click)="formReset('login')">login</button> here</p>
+     </form>
+    }
+</div>

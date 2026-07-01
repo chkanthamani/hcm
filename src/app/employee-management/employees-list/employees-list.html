@@ -1,0 +1,146 @@
+<div class="page-body">
+    <app-header></app-header>
+
+    @if (selectedEmployee) {
+    <div class="overlay-backdrop" (click)="closeEmployeeDetails()"></div>
+    <aside class="employee-details-panel" role="dialog" aria-modal="true" aria-labelledby="employee-details-title">
+        <div class="panel-header">
+            <div>
+                <p class="panel-label">Employee Details</p>
+                <h3 id="employee-details-title">{{ selectedEmployee.fullName || '—' }}</h3>
+            </div>
+            <button type="button" class="icon-btn close-btn" (click)="closeEmployeeDetails()" title="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="panel-body">
+            <div class="detail-row">
+                <span class="detail-label">Email</span>
+                <span class="detail-value">{{ selectedEmployee.email || '—' }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Department</span>
+                <span class="detail-value">{{ selectedEmployee.department || '—' }}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Status</span>
+                <span class="detail-value">
+                    @if (selectedEmployee.status === 1) {
+                    <span class="badge bg-success">Active</span>
+                    }
+                    @else {
+                    <span class="badge bg-danger">Inactive</span>
+                    }
+                </span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Date of Joining</span>
+                <span class="detail-value">{{ selectedEmployee.dateOfJoining || '—' }}</span>
+            </div>
+        </div>
+    </aside>
+    }
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-heading">Employees List</div>
+            <div class="card-actions">
+                <div class="ah-flex-content">
+                    <button class="btn btn-primary" (click)="addEmployee('add')">Add Employee</button>
+                    <input type="text" placeholder="Search here" class="search" [(ngModel)]="search"
+                        (input)="searchList()">
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <table>
+                <thead>
+                    <tr>
+                        <th (click)="sort('fullName')">Employee</th>
+                        <th (click)="sort('email')">Email</th>
+                        <th (click)="sort('department')">Department</th>
+                        <th (click)="sort('dateOfJoining')">Date Of Joining</th>
+                        <th (click)="sort('status')">Status</th>
+                        <th width="15%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (displayEmployees.length === 0) {
+                    <tr>
+                        <td colspan="6" class="empty-state">
+                            @if (search?.toString()?.trim()) {
+                            <span>No search results found</span>
+                            }
+                            @else {
+                            <span>No data found</span>
+                            }
+                        </td>
+                    </tr>
+                    }
+                    @else {
+                    @for (item of displayEmployees; track $index; let i = $index) {
+                    <tr>
+                        <td>
+                            <div class="employee-col">
+                                <div class="emp-image">
+                                    @if(item.profileImage){
+                                    <img src="{{item.profileImage}}" alt="Employee Image">
+                                    }
+                                    @else {
+                                        <span class="alphabet">{{item.fullName | shortName}}</span>
+                                    }
+                                </div>
+                                <div class="emp-data">
+                                    <div class="emp-name">{{item.fullName}}</div>
+                                    <!-- <div class="emp-id">{{item.id?item.id:'&mdash;'}}</div> -->
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{item.email?item.email:'&mdash;'}}</td>
+                        <td>{{item.department?item.department:'&mdash;'}}</td>
+                        <td>{{item.dateOfJoining | date:'dd/MM/yyyy'}}</td>
+                        <td>
+                            @if(item.status === 1){
+                            <span class="badge bg-success">Active</span>
+                            }
+                            @else{
+                            <span class="badge bg-danger">Inactive</span>
+                            }
+                        </td>
+                        <td width="15%">
+                            <button type="button" class="btn btn-outline-secondary btn-sm margin-right" [appTooltip]="'View'"
+                                (click)="openEmployeeDetails(item)"><i class="fas fa-eye"></i></button>
+                            <button class="btn btn-outline-primary btn-sm margin-right" [appTooltip]="'Update'"
+                                (click)="addEmployee('update', item.id)"><i class="far fa-edit"></i></button>
+                            <!-- <button class="btn btn-outline-danger btn-sm margin-right" [appTooltip]="'Delete'"
+                                (click)="deleteEmployee(item.id)"><i class="far fa-trash-alt"></i></button> -->
+                            @if(item.status === 1){
+                            <button class="btn btn-outline-danger btn-sm margin-right" [appTooltip]="'Deactivate'"
+                                (click)="deactivateEmployee(item.id)"><i class="fas fa-user-xmark"></i></button>
+                            }
+                            @else {
+                            <button class="btn btn-outline-primary btn-sm margin-right" [appTooltip]="'Reactivate'"
+                                (click)="restoreEmployee(item.id)"><i class="fas fa-user-check"></i></button>
+                            }
+                        </td>
+                    </tr>
+                    }
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+                            <button class="btn" (click)="PageNavigation('prev')">Prev</button>
+                            @for (item of pages; track $index; let i = $index) {
+                            <button (click)="updatePagination(item.pageCount)">{{item.pageCount}}</button>
+                            }
+                            <button class="btn" (click)="PageNavigation('next')">Next</button>
+                        </td>
+                        <td><span>{{currentPage}} out of {{pages.length}}</span></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

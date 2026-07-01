@@ -1,0 +1,10 @@
+<div class="header">
+    <nav>
+        <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
+        @if(role != 'User'){
+        <a routerLink="/employees" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Employees
+            List</a>
+        }
+    </nav>
+    <button class="btn btn-primary" (click)="logout()">LOGOUT</button>
+</div>
