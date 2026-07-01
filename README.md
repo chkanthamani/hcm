@@ -2,23 +2,37 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.1.
 
+Developed a full-stack Employee Management System using Angular 20, Node.js, Express, and MySQL.
+Implemented JWT authentication, role-based authorization, and HTTP interceptors.
+Built employee CRUD operations with search, sorting, pagination, and image upload.
+Designed a dashboard displaying employee statistics.
+Implemented soft delete (Deactivate/Reactivate) while preserving employee history.
+
 ## Implemented features
 ✔ JWT Authentication
-✔ Role-Based Access
+✔ Reactivate Forms with validations
 ✔ Employee CRUD Operations
 ✔ Search, Sort & Pagination
 ✔ Soft Delete (Deactivate/Reactivate)
 ✔ Image Upload for Profile picture
 ✔ HTTP Interceptors
+✔ Role-Based Access
 ✔ Simple Dashboard
 
 ## Technologies used
 
-Design: HTML5, CSS, SCSS, Bootstrap
+Design: HTML5, CSS3, SCSS, Bootstrap
 
 Frontend: ANGULAR, JAVASCRIPT, TYPESCRIPT, JQERY, RXJS Library, 
 
-Backend: NodeJS, ExpressJS, Mysql DB
+Backend: NodeJS, ExpressJS, Mysql DB, JWT Authentication, Multer
+
+Tools: Git, GitHub, VSCode
+
+AI technologies: Cursor, Git copilot, Claude
+
+## screenshots
+![alt text](login.png)
 
 ## Development server
 
